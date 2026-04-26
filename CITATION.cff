@@ -3,8 +3,8 @@ message: >-
   If you use this software, please cite both the software and the underlying
   PhD thesis.
 title: >-
-  Inverse-hardening-identification-dic-fem: open-source pipeline for combined
-  isotropic-kinematic hardening identification from DIC and FEM
+  DIC + FEM Inverse Identification Toolkit for Anisotropic Sheet-Metal
+  Plasticity (Hill'48 / Yld2000-2d, Voce + Chaboche)
 authors:
   - family-names: Hour
     given-names: Sokaon

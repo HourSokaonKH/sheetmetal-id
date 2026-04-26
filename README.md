@@ -1,4 +1,7 @@
-# Inverse-hardening-identification-dic-fem
+# DIC + FEM Inverse Identification Toolkit for Anisotropic Sheet-Metal Plasticity
+
+*Hill'48 / Yld2000-2d yield surfaces · Voce isotropic + Chaboche kinematic
+hardening · material-agnostic · open-source.*
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
 [![Python](https://img.shields.io/badge/Python-%E2%89%A53.9-blue.svg)](https://www.python.org/)
@@ -6,19 +9,39 @@
 [![Abaqus](https://img.shields.io/badge/Abaqus%2FStandard-%E2%89%A52023-red.svg)](https://www.3ds.com/products-services/simulia/products/abaqus/)
 [![DOI](https://img.shields.io/badge/cite-CITATION.cff-informational.svg)](CITATION.cff)
 
-> **End-to-end open-source pipeline** for identifying combined isotropic + kinematic
-> hardening parameters (Voce + Chaboche) of anisotropic sheet metals from
-> uniaxial tension + multi-zone Digital Image Correlation (DIC) and inverse
-> Abaqus/Standard finite-element optimisation, with Hill'48 and Yld2000-2d
-> yield surfaces.
+> **End-to-end open-source pipeline** for identifying combined isotropic +
+> kinematic hardening parameters (Voce + Chaboche) of **any anisotropic
+> sheet metal** from uniaxial tension + multi-zone Digital Image
+> Correlation (DIC) and inverse Abaqus/Standard finite-element
+> optimisation, with Hill'48 and Yld2000-2d yield surfaces.
 >
 > Designed so that **a researcher with little Python or Abaqus experience
 > can reproduce all numerical results from raw UTM and DIC data** by
 > following [`docs/`](docs/) step-by-step.
 
-Material studied: **SGCC JIS G 3302** galvanized steel sheet
-(DIN 50125 dog-bone, 80×20×1.5 mm, 0°/45°/90°, 3 replicates each,
-ε̇ ≈ 4 × 10⁻⁴ s⁻¹, Canon EOS R6 II 4K @ 25 fps DIC).
+### Applicable to any rolled / cold-rolled sheet metal
+
+The pipeline is material-agnostic. It has been validated on **SGCC JIS G
+3302** galvanized steel (the dataset bundled in [`examples/`](examples/)),
+but every script reads its constants from a single
+[`material_constants.json`](material_constants.json) file, so it can be
+applied without code changes to:
+
+- low-carbon and HSLA steels (DC04, DC06, DP590, DP780, DP980, …),
+- stainless steels (304, 316L, 430, …),
+- aluminium sheet (AA1050, AA5052, AA5754, AA6016-T4, AA6061-T6, AA7075, …),
+- magnesium sheet (AZ31, ZE10, …),
+- copper, brass, titanium sheet (CP-Ti, Ti-6Al-4V), and
+- any other rolled sheet exhibiting in-plane plastic anisotropy.
+
+Bringing a new material in is described in
+[docs/04_hardening_fit.md](docs/04_hardening_fit.md#porting-to-a-new-material) —
+**no Python or Fortran code needs to be edited**, only the JSON file and
+the contents of `raw_data/`.
+
+> Reference experimental campaign for the bundled example: SGCC JIS G 3302
+> (DIN 50125 dog-bone 80 × 20 × 1.5 mm, 0° / 45° / 90°, 3 replicates each,
+> ε̇ ≈ 4 × 10⁻⁴ s⁻¹, Canon EOS R6 II 4K @ 25 fps DIC).
 
 ---
 
@@ -339,10 +362,13 @@ PhD thesis and the JMPT / Metals manuscripts.
 
 ---
 
-## Headline numerical results
+## Headline numerical results (SGCC G 3302 — reference example)
 
-These are the values produced for SGCC JIS G 3302 by running the full
-pipeline on the bundled dataset.
+The values below were produced by running the **same scripts you are
+about to run** on the bundled SGCC G 3302 dataset. They are reported
+here so that you can verify the install end-to-end. When you point the
+pipeline at a different material, the structure of the output is
+identical — only the numbers change.
 
 ### Anisotropy (DIC, multi-zone, GOOD-zone filter)
 
