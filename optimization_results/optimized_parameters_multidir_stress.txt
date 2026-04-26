@@ -1,0 +1,33 @@
+MULTI-DIRECTION OPTIMIZED COMBINED HARDENING PARAMETERS
+============================================================
+
+Yield criterion: yld2000_table
+Yld2000-2d alpha: [1.160557559192314, 0.8326782816587497, 1.6110128809992115, 1.0762301427007934, 1.1976207741126117, 1.9996582790913169, 0.49632408667862227, 1.7752623846274076]
+Method: Nelder-Mead (built-in, FEA-based)
+Directions: 0-deg (w=1), 45-deg (w=2), 90-deg (w=1)
+Total weight: 4.0
+
+Optimized:
+  sigma0 = 329.151055 MPa
+  C1     = 870.264696
+  gamma1 = 361.820710
+  C2     = 213.956908
+  gamma2 = 153.320747
+
+Fixed:
+  Q_inf  = 335.160000 MPa
+  b      = 3.950000
+
+Yld2000-2d alpha: [1.160557559192314, 0.8326782816587497, 1.6110128809992115, 1.0762301427007934, 1.1976207741126117, 1.9996582790913169, 0.49632408667862227, 1.7752623846274076]
+
+Fit:
+  Weighted NRMSE = 0.05811957
+  Iterations = 16
+  Evaluations = 32
+  Abaqus jobs = 96
+  Wall time = 66.9 min
+
+Per-direction NRMSE:
+   0-deg: 0.01808944
+  45-deg: 0.07289007
+  90-deg: 0.06860870

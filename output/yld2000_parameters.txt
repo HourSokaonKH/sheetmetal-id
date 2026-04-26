@@ -1,0 +1,33 @@
+BARLAT YLD2000-2D ANISOTROPIC YIELD CRITERION
+=======================================================
+
+Material: SGCC JIS G 3302
+Exponent: a = 6 (BCC)
+
+Fit objective: measured uniaxial r-values + yield stress ratios
+Reference-only terms excluded from fit: sigma_b, r_b
+Method: L-BFGS-B
+Final cost: 2.762732872883e-20
+
+Identified Coefficients:
+  α1 = 1.15644579
+  α2 = 0.83641007
+  α3 = 1.64777008
+  α4 = 1.08525407
+  α5 = 1.19041025
+  α6 = 1.96314297
+  α7 = 0.11466008
+  α8 = 1.77583465
+
+Experimental vs Predicted:
+     Parameter  Experimental     Predicted   Error %
+  --------------------------------------------------
+            r0        0.7120        0.7120     0.00%
+           r45        0.7998        0.7998     0.00%
+           r90        0.7420        0.7420     0.00%
+        σ45/σ0        0.7153        0.7153     0.00%
+        σ90/σ0        1.0821        1.0821     0.00%
+
+Reference-only biaxial terms:
+         σb/σ0        0.9347        0.7277
+            rb        0.9596        0.8730

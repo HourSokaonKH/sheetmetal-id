@@ -1,0 +1,23 @@
+OPTIMIZED COMBINED HARDENING PARAMETERS
+==================================================
+
+Method: Nelder-Mead (built-in)
+Experimental: 0-deg mean of 3 specimens
+
+Optimized:
+  sigma0 = 324.133031 MPa
+  C1     = 109.493536
+  gamma1 = 691.696474
+  C2     = 104.666443
+  gamma2 = 213.979983
+
+Fixed:
+  Q_inf  = 335.160000 MPa
+  b      = 3.950000
+
+Hill48: R11=1.0000 R22=1.0119 R33=0.9347 R12=1.0041
+
+Fit:
+  NRMSE = 0.05684612
+  Iterations = 59
+  Evaluations = 101

@@ -1,0 +1,33 @@
+MULTI-DIRECTION OPTIMIZED COMBINED HARDENING PARAMETERS
+============================================================
+
+Yield criterion: hill48
+Hill48 calibration: r_value
+Method: Nelder-Mead (built-in, FEA-based)
+Directions: 0-deg (w=1), 45-deg (w=2), 90-deg (w=1)
+Total weight: 4.0
+
+Optimized:
+  sigma0 = 262.341906 MPa
+  C1     = 977.548470
+  gamma1 = 418.894468
+  C2     = 198.386257
+  gamma2 = 155.637295
+
+Fixed:
+  Q_inf  = 335.160000 MPa
+  b      = 3.950000
+
+Hill48: R11=1.0000 R22=1.0119 R33=0.9347 R12=1.0041
+
+Fit:
+  Weighted NRMSE = 0.43295935
+  Iterations = 49
+  Evaluations = 141
+  Abaqus jobs = 423
+  Wall time = 158.1 min
+
+Per-direction NRMSE:
+   0-deg: 0.43593102
+  45-deg: 0.38547187
+  90-deg: 0.52496264

@@ -1,0 +1,37 @@
+{
+  "_comment": "Single source of truth for SGCC JIS G 3302 constants used by optimize_hardening*.py, bayesian_reidentification.py, yld2000_param_sensitivity.py, generate_fig_yld2000_multidir.py, barlat_yld2000.py. Units: MPa, mm, tonne/mm^3.",
+  "material": "SGCC JIS G 3302 galvanized steel",
+
+  "elastic": {
+    "E_MPa": 200000.0,
+    "nu": 0.3,
+    "density_tonne_per_mm3": 7.85e-9
+  },
+
+  "voce_isotropic_0deg": {
+    "Q_inf_MPa": 335.16,
+    "b": 3.95,
+    "source": "Voce fit of the 0-deg pooled true stress - plastic strain curve (data_processing.py)."
+  },
+
+  "r_values_multizone_DIC": {
+    "r0":  0.7120,
+    "r45": 0.7998,
+    "r90": 0.7420,
+    "source": "Multi-zone DIC extraction with weighted pooling over 3 specimens per direction (compute_anisotropy.m)."
+  },
+
+  "offset_yield_ratios_pooled": {
+    "sigma_0_over_sigma_0":  1.0,
+    "sigma_45_over_sigma_0": 0.7152506553271111,
+    "sigma_90_over_sigma_0": 1.0820253315348436,
+    "source": "Ratios of pooled 0.2%-offset yield stresses (output/offset_yield_pooled.json)."
+  },
+
+  "offset_yield_pooled_MPa": {
+    "sigma_0":  352.53,
+    "sigma_45": 252.17,
+    "sigma_90": 381.47,
+    "source": "Fallback literal values; authoritative copy lives in output/offset_yield_pooled.json."
+  }
+}

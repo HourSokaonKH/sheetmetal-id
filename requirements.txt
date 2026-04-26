@@ -1,0 +1,12 @@
+# Core scientific stack
+numpy>=1.23
+scipy>=1.10
+pandas>=1.5
+matplotlib>=3.6
+
+# DIC strain processing
+pillow>=9.0
+
+# Bayesian re-identification (bayesian_reidentification.py)
+emcee>=3.1
+corner>=2.2

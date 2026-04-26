@@ -1,0 +1,39 @@
+cff-version: 1.2.0
+message: >-
+  If you use this software, please cite both the software and the underlying
+  PhD thesis.
+title: >-
+  Inverse-hardening-identification-dic-fem: open-source pipeline for combined
+  isotropic-kinematic hardening identification from DIC and FEM
+authors:
+  - family-names: Hour
+    given-names: Sokaon
+    affiliation: Institute of Technology of Cambodia
+type: software
+license: MIT
+repository-code: >-
+  https://github.com/HourSokaonKH/Inverse-hardening-identification-dic-fem
+version: 1.0.0
+date-released: '2026-04-26'
+keywords:
+  - inverse identification
+  - digital image correlation
+  - finite element
+  - sheet metal forming
+  - Hill'48
+  - Yld2000-2d
+  - Chaboche
+  - kinematic hardening
+  - SGCC
+preferred-citation:
+  type: thesis
+  thesis-type: PhD
+  authors:
+    - family-names: Hour
+      given-names: Sokaon
+  title: >-
+    Inverse Identification of Combined Hardening Parameters for Anisotropic
+    Sheet Metals using DIC-Assisted Finite-Element Optimisation
+  year: 2026
+  institution:
+    name: Institute of Technology of Cambodia

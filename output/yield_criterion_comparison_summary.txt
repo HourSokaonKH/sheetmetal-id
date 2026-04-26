@@ -1,0 +1,52 @@
+YIELD CRITERION COMPARISON SUMMARY
+============================================================
+
+Material: SGCC JIS G 3302
+Scope: Mac-safe thesis comparison without UMAT-based Yld2000 FEA
+
+Measured uniaxial targets
+------------------------------------------------------------
+  r0=0.7120, r45=0.7998, r90=0.7420
+  sigma0=352.53 MPa, sigma45=252.17 MPa, sigma90=381.47 MPa
+  sigma45/sigma0=0.715315, sigma90/sigma0=1.082092
+
+1. Hill'48 r-value calibration
+------------------------------------------------------------
+  Weighted FEA NRMSE: 0.433
+  Predicted sigma45/sigma0: 0.985301
+  Predicted sigma90/sigma0: 1.011923
+  45-deg yield error: +37.7%
+  Interpretation: matches the measured r-values but misses the severe 45-deg yield-stress drop.
+
+2. Hill'48 stress calibration
+------------------------------------------------------------
+  Weighted FEA NRMSE: 0.164
+  Per-direction NRMSE: 0-deg=0.041, 45-deg=0.212, 90-deg=0.191
+  Predicted sigma45/sigma0: 0.715194
+  Predicted sigma90/sigma0: 1.082101
+  Implied r-values: r0=0.7122, r45=2.8256, r90=0.9496
+  Backstress saturation at optimum: 3.420 MPa
+  Interpretation: fits the three uniaxial yield stresses, but the 45-deg residual remains because one isotropic hardening law cannot reproduce direction-dependent hardening.
+
+3. Yld2000-2d measured-only identification
+------------------------------------------------------------
+  Method: L-BFGS-B
+  Final objective cost: 2.762732872883e-20
+  Coefficients:
+    alpha1 = 1.15644579
+    alpha2 = 0.83641007
+    alpha3 = 1.64777008
+    alpha4 = 1.08525407
+    alpha5 = 1.19041025
+    alpha6 = 1.96314297
+    alpha7 = 0.11466008
+    alpha8 = 1.77583465
+  Predicted r-values: r0=0.7120, r45=0.7998, r90=0.7420
+  Predicted stress ratios: sigma45/sigma0=0.715315, sigma90/sigma0=1.082092
+  Interpretation: resolves the measured yield-surface anisotropy exactly at the uniaxial level.
+
+Conclusion
+------------------------------------------------------------
+  Hill'48 cannot simultaneously represent the measured r-values and the moderate 45-deg yield-stress softening (sigma45/sigma0 = 0.715) of this SGCC sheet.
+  Stress-calibrated Hill'48 remains the best available FEA model on the current machine (weighted NRMSE 0.164 vs 0.433 for the r-value calibration), but its remaining 45-deg error is a hardening-anisotropy limitation rather than a yield-stress mismatch.
+  Yld2000-2d provides the correct non-FEA reference for the thesis because it matches both measured r-values and measured yield-stress ratios exactly, while UMAT-based FEA is unavailable on the current Apple Silicon / Parallels setup.

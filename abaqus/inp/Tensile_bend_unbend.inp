@@ -1,0 +1,193 @@
+**========================================================================
+** Cyclic three-point bend-unbend template for Bauschinger identification
+** SGCC JIS G 3302 galvanized sheet, 1.5 mm thick, 80 x 20 mm gauge
+**
+** Geometry (2-D plane stress, width = 20 mm):
+**   Specimen length  L  = 120 mm
+**   Support span     S  =  60 mm  (centre-to-centre of bottom rollers)
+**   Roller radius    R  =   5 mm
+**   Thickness        t  =  1.5 mm  (assigned via *Shell Section)
+**
+** Loading:
+**   Step-1 LOAD    : centre roller moves down by 8 mm (≈ +3.5% surface strain)
+**   Step-2 UNLOAD  : centre roller retracts to 0
+**   Step-3 REVERSE : specimen is flipped (alternative: pushers from below)
+**     -> We model the flip by reversing the roller contacts in Step-3.
+**   Step-4 LOAD2   : downward displacement of 8 mm on the flipped orientation
+**   Step-5 UNLOAD2 : retract
+**
+** Outputs:
+**   RF2 and U2 of the reference node on the centre roller (load-displacement)
+**   S11, S22, S12, PEEQ at surface integration points (top & bottom fibres)
+**
+** Usage with the Yld2000 UMAT (SGCC JIS G 3302):
+**   abaqus job=bend_unbend user=umat_yld2000 cpus=4 interactive
+**
+** NOTE: this is a planar plane-stress 2-D template; for a 3-D validation,
+** replace CPS4 by S4R shell with thickness = 1.5 mm and enrich the load
+** step for out-of-plane deflection.
+**========================================================================
+*Heading
+Three-point cyclic bend-unbend of SGCC sheet (2-D plane stress)
+*Preprint, echo=NO, model=NO, history=NO, contact=NO
+**
+**=============================== MATERIALS ================================
+** The UMAT uses 13 properties (see umat_yld2000.f header comments):
+**   (1) E, (2) nu, (3) sigma_y0, (4) Q_inf, (5) b,
+**   (6) C1, (7) gamma1, (8) C2, (9) gamma2,
+**   (10-13) Yld2000 alpha1..alpha8 packed (matching output/yld2000_parameters.json)
+** Replace the alpha entries with the 8 coefficients from
+** output/yld2000_parameters.json (in SGCC the values are:
+**   a1=0.9985, a2=1.0000, a3=0.9880, a4=1.0093,
+**   a5=1.0052, a6=1.0000, a7=0.9000, a8=1.0820  -- example only, check JSON)
+**
+** Initial-guess hardening parameters (posterior median from Bayesian re-id,
+** output/bayesian_reid_summary.txt; these will be re-identified in the
+** bend-unbend inverse problem):
+**   sigma0 = 283.7 MPa
+**   C1     = 30700 MPa     gamma1 = 755
+**   C2     = 105  MPa      gamma2 = 1.96
+**   Q_inf  = 335.16 MPa    b      = 3.95
+**
+*Material, name=SGCC_YLD2000
+*Depvar
+  1
+*User material, constants=13
+  200000., 0.3, 283.7, 335.16, 3.95,
+  30700., 755., 105., 1.96, 0.9985,
+  1.0000, 0.9880, 1.0093
+** --- additional alpha coefficients on a second constants line if your UMAT
+**     expects them; the shipped umat_yld2000.f packs alpha into the last slot
+**     pair.  Verify against the umat source before running.
+**
+**=============================== PARTS ====================================
+*Part, name=SHEET
+*Node
+**    generated below by *Ngen / *Nset block; see Include template
+**    keep as parameter file; here we just reference a pre-meshed part
+*Include, input=sheet_mesh.inp
+*Solid Section, elset=E_ALL, material=SGCC_YLD2000
+1.5
+*End Part
+**
+*Part, name=ROLLER_TOP
+*Node
+      1,  0.0,  0.0
+*Nset, nset=RP_TOP
+  1
+*Rigid Body, ref node=RP_TOP, analytical surface=SURF_TOP
+*Surface, type=SEGMENTS, name=SURF_TOP
+ START,   -5.0, 5.0
+ CIRCL,    5.0, 5.0,  0.0, 5.0
+*End Part
+**
+*Part, name=ROLLER_LEFT
+*Node
+      1, -30.0, -5.0
+*Nset, nset=RP_LEFT
+  1
+*Rigid Body, ref node=RP_LEFT, analytical surface=SURF_LEFT
+*Surface, type=SEGMENTS, name=SURF_LEFT
+ START,  -35.0,  0.0
+ CIRCL,  -25.0,  0.0,  -30.0, 0.0
+*End Part
+**
+*Part, name=ROLLER_RIGHT
+*Node
+      1,  30.0, -5.0
+*Nset, nset=RP_RIGHT
+  1
+*Rigid Body, ref node=RP_RIGHT, analytical surface=SURF_RIGHT
+*Surface, type=SEGMENTS, name=SURF_RIGHT
+ START,   25.0,  0.0
+ CIRCL,   35.0,  0.0,   30.0, 0.0
+*End Part
+**
+**=============================== ASSEMBLY =================================
+*Assembly, name=Assembly
+*Instance, name=SHEET-1, part=SHEET
+*End Instance
+*Instance, name=TOP-1, part=ROLLER_TOP
+*End Instance
+*Instance, name=LEFT-1, part=ROLLER_LEFT
+*End Instance
+*Instance, name=RIGHT-1, part=ROLLER_RIGHT
+*End Instance
+**
+**=============================== CONTACT ==================================
+*Surface Interaction, name=FRICTIONLESS
+*Friction
+0.0,
+*Contact Pair, interaction=FRICTIONLESS, type=SURFACE TO SURFACE
+SHEET-1.S_TOP, TOP-1.SURF_TOP
+*Contact Pair, interaction=FRICTIONLESS, type=SURFACE TO SURFACE
+SHEET-1.S_BOT, LEFT-1.SURF_LEFT
+*Contact Pair, interaction=FRICTIONLESS, type=SURFACE TO SURFACE
+SHEET-1.S_BOT, RIGHT-1.SURF_RIGHT
+*End Assembly
+**
+**=============================== BOUNDARY =================================
+*Boundary
+LEFT-1.RP_LEFT, 1, 6, 0.0
+RIGHT-1.RP_RIGHT, 1, 6, 0.0
+TOP-1.RP_TOP, 1, 1, 0.0
+TOP-1.RP_TOP, 6, 6, 0.0
+**
+**=============================== STEP 1 — LOAD ============================
+*Step, name=LOAD1, nlgeom=YES, inc=200
+*Static
+0.02, 1.0, 1e-6, 0.05
+*Boundary
+TOP-1.RP_TOP, 2, 2, -8.0
+*Output, field, frequency=5
+*Node Output
+U, RF
+*Element Output, directions=YES
+S, E, PEEQ, SDV
+*Output, history, frequency=1
+*Node Output, nset=TOP-1.RP_TOP
+U2, RF2
+*End Step
+**
+**=============================== STEP 2 — UNLOAD ==========================
+*Step, name=UNLOAD1, nlgeom=YES, inc=200
+*Static
+0.02, 1.0, 1e-6, 0.05
+*Boundary
+TOP-1.RP_TOP, 2, 2, 0.0
+*End Step
+**
+**=============================== STEP 3 — REVERSE =========================
+** The simplest way to model "flip the specimen" is to swap top/bottom
+** contact pairs via *Model Change or to use a second set of rollers on
+** the opposite side and deactivate the first set.  Below we use a
+** *Model Change block; if your Abaqus version rejects it, replicate
+** the rollers above/below and toggle contact pairs.
+*Step, name=REVERSE, nlgeom=YES, inc=50
+*Static
+0.02, 1.0, 1e-6, 0.05
+*Model Change, remove
+SHEET-1.S_TOP, TOP-1.SURF_TOP
+SHEET-1.S_BOT, LEFT-1.SURF_LEFT
+SHEET-1.S_BOT, RIGHT-1.SURF_RIGHT
+*Model Change, add=STRAIN FREE
+SHEET-1.S_BOT, TOP-1.SURF_TOP
+SHEET-1.S_TOP, LEFT-1.SURF_LEFT
+SHEET-1.S_TOP, RIGHT-1.SURF_RIGHT
+*End Step
+**
+**=============================== STEP 4 — LOAD2 ===========================
+*Step, name=LOAD2, nlgeom=YES, inc=200
+*Static
+0.02, 1.0, 1e-6, 0.05
+*Boundary
+TOP-1.RP_TOP, 2, 2, 8.0
+*End Step
+**
+**=============================== STEP 5 — UNLOAD2 =========================
+*Step, name=UNLOAD2, nlgeom=YES, inc=200
+*Static
+0.02, 1.0, 1e-6, 0.05
+*Boundary
+TOP-1.RP_TOP, 2, 2, 0.0
+*End Step

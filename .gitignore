@@ -1,0 +1,79 @@
+# ── Python ──────────────────────────────────────────────────────────────
+__pycache__/
+*.py[cod]
+*.egg-info/
+.venv/
+venv/
+.env
+.pytest_cache/
+.ipynb_checkpoints/
+
+# ── OS junk ─────────────────────────────────────────────────────────────
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# ── Editor / IDE ────────────────────────────────────────────────────────
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# ── Abaqus run-time files (regenerated on every run) ────────────────────
+*.com
+*.dat
+*.lck
+*.mdl
+*.msg
+*.odb
+*.pac
+*.par
+*.pes
+*.pmg
+*.prt
+*.rec
+*.rpy
+*.rpy.*
+*.sel
+*.sim
+*.sta
+*.stt
+*.SMABulk
+*.023
+*.simdir/
+
+# ── Fortran compile junk ────────────────────────────────────────────────
+*.obj
+*.mod
+*.o
+*.lib
+*.exp
+
+# ── Bulk DIC images: NEVER commit ─────────────────────────────
+raw_data/*/img_*.png
+raw_data/*/img_*.PNG
+raw_data/*/*.tif
+raw_data/*/TMP/
+raw_data/*/VTK/
+raw_data/*/FIG/
+raw_data/*/*.vtk
+raw_data/*/*.ufr
+raw_data/*/strain_export/
+raw_data/DIC_ANALYZE/
+
+# ── Backup / scratch ────────────────────────────────────────────────────
+*.bak
+*.orig
+*.tmp
+*.log
+
+# ── LaTeX / docs (not part of this software repo) ──────────────────────
+*.aux
+*.fdb_latexmk
+*.fls
+*.toc
+*.lof
+*.lot
+*.equ
+*.out
+*.synctex.gz
