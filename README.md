@@ -139,7 +139,7 @@ matches the order above.
 ## Repository layout
 
 ```
-Inverse-hardening-identification-dic-fem/
+sheetmetal-id/
 ├── README.md                     ← this file
 ├── INSTALL.md                    ← OS-by-OS install commands
 ├── LICENSE                       ← MIT
@@ -205,8 +205,8 @@ This runs the analytical-only path on the bundled example data. It does
 
 ```bash
 # 1. Clone
-git clone git@github.com:HourSokaonKH/Inverse-hardening-identification-dic-fem.git
-cd Inverse-hardening-identification-dic-fem
+git clone git@github.com:HourSokaonKH/sheetmetal-id.git
+cd sheetmetal-id
 
 # 2. Python environment
 python3 -m venv .venv
@@ -499,14 +499,13 @@ underlying PhD thesis. Citation metadata is provided in
 [`CITATION.cff`](CITATION.cff). BibTeX:
 
 ```bibtex
-@software{hour_2026_inverse_hardening_dic_fem,
+@software{hour_2026_sheetmetal_id,
   author       = {Hour, Sokaon},
-  title        = {{Inverse-hardening-identification-dic-fem: open-source
-                   pipeline for combined isotropic-kinematic hardening
-                   identification from DIC and FEM}},
+  title        = {{sheetmetal-id: DIC + FEM Inverse Identification
+                   Toolkit for Anisotropic Sheet-Metal Plasticity}},
   year         = {2026},
   version      = {1.0.0},
-  url          = {https://github.com/HourSokaonKH/Inverse-hardening-identification-dic-fem},
+  url          = {https://github.com/HourSokaonKH/sheetmetal-id},
   license      = {MIT}
 }
 
@@ -547,6 +546,6 @@ terms.
 ---
 
 > **Questions, bugs, contributions?** Open an issue or pull request on
-> [GitHub](https://github.com/HourSokaonKH/Inverse-hardening-identification-dic-fem).
+> [GitHub](https://github.com/HourSokaonKH/sheetmetal-id).
 > When reporting a problem, please include the smallest possible
 > reproducer, the exact command, and the full traceback.

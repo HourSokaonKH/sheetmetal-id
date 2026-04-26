@@ -12,7 +12,7 @@ authors:
 type: software
 license: MIT
 repository-code: >-
-  https://github.com/HourSokaonKH/Inverse-hardening-identification-dic-fem
+  https://github.com/HourSokaonKH/sheetmetal-id
 version: 1.0.0
 date-released: '2026-04-26'
 keywords:

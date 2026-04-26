@@ -26,7 +26,7 @@ stages run in pure Python.
 ## Procedure
 
 ```matlab
->> cd /path/to/Inverse-hardening-identification-dic-fem
+>> cd /path/to/sheetmetal-id
 >> extract_strains_00deg          % → r0_result.mat
 >> extract_strains_45deg          % → r45_result.mat
 >> extract_strains_90deg          % → r90_result.mat

@@ -20,8 +20,8 @@ to run a fresh inverse identification.
 ### macOS / Linux
 
 ```bash
-git clone git@github.com:HourSokaonKH/Inverse-hardening-identification-dic-fem.git
-cd Inverse-hardening-identification-dic-fem
+git clone git@github.com:HourSokaonKH/sheetmetal-id.git
+cd sheetmetal-id
 
 python3 -m venv .venv
 source .venv/bin/activate
@@ -32,8 +32,8 @@ pip install -r requirements.txt
 ### Windows (PowerShell)
 
 ```powershell
-git clone git@github.com:HourSokaonKH/Inverse-hardening-identification-dic-fem.git
-cd Inverse-hardening-identification-dic-fem
+git clone git@github.com:HourSokaonKH/sheetmetal-id.git
+cd sheetmetal-id
 
 py -3 -m venv .venv
 .venv\Scripts\Activate.ps1
@@ -59,7 +59,7 @@ python data_processing.py            # should write to output/
    produced by Ufreckles.
 3. Add the repository root to your MATLAB path **once** per session:
    ```matlab
-   >> cd /path/to/Inverse-hardening-identification-dic-fem
+   >> cd /path/to/sheetmetal-id
    ```
    All scripts (`extract_strains_00deg.m`, …, `compute_anisotropy.m`) assume
    that you are sitting in the repository root and that raw DIC results live
