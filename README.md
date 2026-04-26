@@ -513,7 +513,9 @@ terms.
 - **Abaqus/Standard** (Dassault Systèmes) — finite-element solver.
 - **Intel oneAPI** — Fortran toolchain for the UMAT.
 - **emcee, corner, scipy, numpy, matplotlib** maintainers.
-- The Institute of Technology of Cambodia (ITC) for hosting the
+- The **National Polytechnic Institute of Cambodia (NPIC)** for funding
+  the doctoral scholarship that supported this research.
+- The **Institute of Technology of Cambodia (ITC)** for hosting the
   experimental campaign and providing access to the UTM and DIC rig.
 
 ---
